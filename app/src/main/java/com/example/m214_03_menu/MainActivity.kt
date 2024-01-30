@@ -1,45 +1,39 @@
-package com.example.m214_03_menu;
+package com.example.m214_03_menu
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
-        return true;
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new First()).commit();
-                return true;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item1 -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameLayout, First())
+                    .commit()
+                true
+            }
 
-            case R.id.item2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Second()).commit();
-                return true;
+            R.id.item2 -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameLayout, Second())
+                    .commit()
+                true
+            }
 
-            default:
-                return super.onOptionsItemSelected(item);
-
+            else -> super.onOptionsItemSelected(item)
         }
-
-
     }
 }
